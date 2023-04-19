@@ -22,9 +22,29 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-/*
- * Add a Find Item Order# and Remove Button for orders page (Will probably use an Input manager of some sort)
- */
+/**************************************************************
+* Name        : DataStructureFinal
+* Author      : Nicholas Morrow
+* Created     : 5/4/2023
+* Course      : CIS 152 Data Structures
+* Version     : 1.0
+* OS          : Windows 11
+* Copyright   : This is my own original work based on
+*               specifications issued by our instructor
+* Description : An online food ordering system that allows owners 
+* 				to order food would help them manage their orders 
+* 				and inventory more efficiently. The system would 
+* 				allow resturant owners to browse menus and place 
+* 				orders. It would also provide restaurant owners 
+* 				with tools to manage their orders and track 
+* 				inventory.
+*               Input:  Item names, adding and removing items
+*               Output: Item names and order numbers
+* Academic Honesty: I attest that this is my original work.
+* I have not used unauthorized source code, either modified or 
+* unmodified. I have not given other fellow student(s) access to
+* my program.         
+***************************************************************/
 
 public class Main extends Application {
 
@@ -63,6 +83,7 @@ public class Main extends Application {
 		itemList.add(new Item("Soft Drink", 1.00));
 		itemList.sort();
 
+		// GUI for item list
 		ListView<Item> menuList = new ListView<>();
 		ObservableList<Item> menuItems = FXCollections.observableArrayList();
 		for (Item item : itemList.GetItemList()) {
@@ -71,7 +92,8 @@ public class Main extends Application {
 		menuList.setItems(menuItems);
 		orderingLayout.getChildren().add(menuList);
 
-		LinkedList<Item> tempOrders = new LinkedList<Item>();
+		LinkedList<Item> tempOrders = new LinkedList<Item>(); // Holds push items
+		// Button for adding items to push list
 		Button addButton = new Button("Add to Order");
 		addButton.setStyle("-fx-background-color: #27AE60; -fx-text-fill: white;");
 		orderingLayout.getChildren().add(addButton);
@@ -89,6 +111,7 @@ public class Main extends Application {
 		ordersLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		ordersLayout.add(ordersLabel, 0, 0);
 
+		// List of items in the push list
 		ListView<Item> ordersList = new ListView<>();
 		ObservableList<Item> orderItems = FXCollections.observableArrayList();
 		ordersList.setItems(orderItems);
@@ -104,11 +127,13 @@ public class Main extends Application {
 		inventoryTextArea.setText("Sample");
 		ordersLayout.add(inventoryTextArea, 1, 1);
 
+		// All orders
 		ComboBox<Integer> allOrders = new ComboBox<>();
 		ObservableList<Integer> allOrdersList = FXCollections.observableArrayList();
 		allOrders.setPromptText("Choose Order");
 		ordersLayout.add(allOrders, 1, 3);
 
+		// Shows all items in a order in the inventoryTextArea
 		Button showOrderButton = new Button("Show Items");
 		showOrderButton.setStyle("-fx-background-color: #27AE60; -fx-text-fill: white;");
 		ordersLayout.add(showOrderButton, 1, 4);
@@ -123,6 +148,7 @@ public class Main extends Application {
 			}
 		});
 
+		// Deletes the order from the HashTable of orders
 		Button removeOrder = new Button("Remove Order");
 		removeOrder.setStyle("-fx-background-color: #D63447; -fx-text-fill: white;");
 		ordersLayout.add(removeOrder, 1, 5);
@@ -139,6 +165,7 @@ public class Main extends Application {
 			allOrders.getItems().addAll(allOrdersList);
 		});
 
+		// Updates all GUI elements in the orders page
 		Button updateButton = new Button("Update");
 		updateButton.setStyle("-fx-background-color: #27AE60; -fx-text-fill: white;");
 		ordersLayout.add(updateButton, 0, 3);
@@ -161,6 +188,7 @@ public class Main extends Application {
 			allOrders.getItems().addAll(allOrdersList);
 		});
 
+		// Pushes the push list to the users order hashtable
 		Button completeButton = new Button("Complete Order");
 		completeButton.setStyle("-fx-background-color: #D63447; -fx-text-fill: white;");
 		ordersLayout.add(completeButton, 0, 4);
@@ -171,6 +199,7 @@ public class Main extends Application {
 			}
 		});
 
+		// Resets all orders in the push list
 		Button clearButton = new Button("Clear Order");
 		clearButton.setStyle("-fx-background-color: #D63447; -fx-text-fill: white;");
 		ordersLayout.add(clearButton, 0, 5);
@@ -179,12 +208,14 @@ public class Main extends Application {
 			orderItems.clear();
 		});
 
+		// Input for manual adding and removing
 		TextArea inputTextArea = new TextArea();
 		inputTextArea.setEditable(true);
 		inputTextArea.setPrefRowCount(1);
 		inputTextArea.setText("");
 		ordersLayout.add(inputTextArea, 1, 2);
 
+		// Manual add to a selected order
 		Button addItemButton = new Button("Add Item");
 		addItemButton.setStyle("-fx-background-color: #27AE60; -fx-text-fill: white;");
 		ordersLayout.add(addItemButton, 1, 6);
@@ -199,6 +230,7 @@ public class Main extends Application {
 			}
 		});
 
+		// Manual remove of a selected order
 		Button removeItemButton = new Button("Remove Item");
 		removeItemButton.setStyle("-fx-background-color: #D63447; -fx-text-fill: white;");
 		ordersLayout.add(removeItemButton, 1, 7);
